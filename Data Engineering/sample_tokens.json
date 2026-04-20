@@ -1,0 +1,40 @@
+[
+  {
+    "doc_id": "1",
+    "original_text": "I love this phone! Amazing battery.",
+    "cleaned_text": "i love this phone amazing battery",
+    "tokens": [
+      "i",
+      "love",
+      "this",
+      "phone",
+      "amazing",
+      "battery"
+    ]
+  },
+  {
+    "doc_id": "2",
+    "original_text": "Terrible service, very slow and rude.",
+    "cleaned_text": "terrible service very slow and rude",
+    "tokens": [
+      "terrible",
+      "service",
+      "very",
+      "slow",
+      "and",
+      "rude"
+    ]
+  },
+  {
+    "doc_id": "3",
+    "original_text": "The product arrived on time.",
+    "cleaned_text": "the product arrived on time",
+    "tokens": [
+      "the",
+      "product",
+      "arrived",
+      "on",
+      "time"
+    ]
+  }
+]
