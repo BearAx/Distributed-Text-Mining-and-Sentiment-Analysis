@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-Data Engineer module for Project 18: Distributed Text Mining and Sentiment Analysis.
-
 Responsibilities:
 - Load dataset from TXT / CSV / JSON / JSONL
 - Clean text: lowercase + remove punctuation + normalize spaces
