@@ -131,7 +131,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 }
 ```
 
-**Owner:** `[Name / GitHub username]`
+**Owner:** [uSs3ewa](https://github.com/uSs3ewa)
 
 **Status:** `[Completed / In Progress / Pending]`
 
@@ -175,7 +175,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 }
 ```
 
-**Owner:** `[Name / GitHub username]`
+**Owner:** [LeoPython2006](https://github.com/LeoPython2006)
 
 **Status:** `[Completed / In Progress / Pending]`
 
@@ -201,7 +201,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 - runtime comparison;
 - scalability observations.
 
-**Owner:** `[Name / GitHub username]`
+**Owner:** [Telman3000](https://github.com/Telman3000)
 
 **Status:** `[Completed / In Progress / Pending]`
 
@@ -224,7 +224,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 - average tokens per document;
 - runtime under different chunk configurations.
 
-**Owner:** `[Name / GitHub username]`
+**Owner:** [Mysteri0K1ng](https://github.com/Mysteri0K1ng)
 
 **Status:** `[Completed / In Progress / Pending]`
 
@@ -234,11 +234,11 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 
 | Stage | Role | Main Work | Main Inputs | Main Outputs | Owner | Status |
 |------|------|-----------|-------------|--------------|-------|--------|
-| 1 | Data Engineer | Load, clean, tokenize text | Raw dataset | Cleaned text, tokens | `[Name]` | `[Status]` |
-| 2 | Lexicon Specialist | Score tokens with lexicon | Tokens, lexicon | Score, predicted sentiment | `[Name]` | `[Status]` |
-| 3 | MapReduce Developer | Implement mapper and reducer | Scored documents | Aggregated counts | `[Name]` | `[Status]` |
-| 4 | Parallelization Engineer | Chunking and parallel execution | Mapper logic | Runtime/scalability results | `[Name]` | `[Status]` |
-| 5 | Validation & Metrics | Accuracy and summary statistics | Predictions, labels | Metrics, evaluation report | `[Name]` | `[Status]` |
+| 1 | Data Engineer | Load, clean, tokenize text | Raw dataset | Cleaned text, tokens | [BearAx](https://github.com/BearAx) | `[Status]` |
+| 2 | Lexicon Specialist | Score tokens with lexicon | Tokens, lexicon | Score, predicted sentiment | [uSs3ewa](https://github.com/uSs3ewa) | `[Status]` |
+| 3 | MapReduce Developer | Implement mapper and reducer | Scored documents | Aggregated counts | [LeoPython2006](https://github.com/LeoPython2006) | `[Status]` |
+| 4 | Parallelization Engineer | Chunking and parallel execution | Mapper logic | Runtime/scalability results | [Telman3000](https://github.com/Telman3000) | `[Status]` |
+| 5 | Validation & Metrics | Accuracy and summary statistics | Predictions, labels | Metrics, evaluation report | [Mysteri0K1ng](https://github.com/Mysteri0K1ng) | `[Status]` |
 
 ---
 
@@ -542,50 +542,6 @@ The final stage measures correctness and produces evaluation outputs.
 
 ---
 
-## Suggested Repository Structure
-
-```text
-Distributed-Text-Mining-and-Sentiment-Analysis/
-│
-├── data/
-│   └── all-data.csv
-│
-├── scripts/
-│   ├── data_engineering.py
-│   ├── lexicon_scoring.py
-│   ├── mapper.py
-│   ├── reducer.py
-│   ├── parallel_runner.py
-│   └── validation_metrics.py
-│
-├── output_data_engineer/
-│   ├── cleaned_dataset.csv
-│   ├── tokens.json
-│   ├── vocabulary.json
-│   ├── top_words.csv
-│   └── summary.json
-│
-├── output_lexicon/
-│   ├── scored_documents.json
-│   └── sentiment_summary.json
-│
-├── output_mapreduce/
-│   ├── mapped_results.json
-│   └── reduced_summary.json
-│
-├── output_parallel/
-│   └── runtime_results.csv
-│
-├── output_validation/
-│   ├── metrics.json
-│   └── evaluation_notes.md
-│
-├── README.md
-└── README_data_engineer.md
-```
-
----
-
 ## Example End-to-End Data Transformation
 
 ### Input dataset record
@@ -681,113 +637,14 @@ So the preprocessing stage intentionally stays simple and aligned with the speci
 ### Recommended execution order
 
 ```bash
-python scripts/data_engineering.py
+python scripts/data_preprocessing.py
 python scripts/lexicon_scoring.py
 python scripts/mapper.py
 python scripts/parallel_runner.py
 python scripts/validation_metrics.py
 ```
 
-> Update these script names if the repository uses different filenames.
-
 ---
-
-## Evaluation Schema Alignment
-
-### 1. Functionality (30%)
-
-**Requirement:**
-
-- Does the implementation meet the required specifications?
-- Are the core features correctly implemented?
-- Is the code clear and understandable?
-
-**How this project addresses functionality:**
-
-- loads a real dataset;
-- preprocesses the text correctly;
-- tokenizes documents;
-- classifies sentiment using a pre-trained lexicon;
-- produces one sentiment label per document;
-- aggregates final results;
-- supports chunk-based processing;
-- demonstrates parallel execution;
-- computes summary statistics and metrics.
-
-**Code quality support:**
-
-- modular scripts;
-- readable function names;
-- stage-by-stage separation;
-- inline comments where needed;
-- human-readable output files.
-
----
-
-### 2. Design and Documentation (50%)
-
-**Requirement:**
-
-- quality of the written report;
-- architecture decisions;
-- demonstration quality;
-- explanation of design choices.
-
-**How this project addresses design and documentation:**
-
-- clearly documented full pipeline;
-- explicit architecture explanation;
-- team role decomposition;
-- justified design decisions;
-- documented inputs and outputs;
-- structured handoff between stages;
-- demo-ready examples and outputs.
-
-**Important design decisions already documented:**
-
-- why lexicon-based sentiment was selected;
-- why MapReduce is suitable;
-- why chunk-based parallelism was chosen;
-- why preprocessing was kept simple and readable;
-- why modular outputs improve collaboration.
-
----
-
-### 3. Oral Presentation (20%)
-
-**Requirement:**
-
-- quality of presentation;
-- explanation of design choices;
-- ability to answer questions.
-
-**How this project supports the oral presentation:**
-
-- each stage has a clear owner;
-- the architecture is linear and easy to explain;
-- the system has visible intermediate outputs;
-- the design choices are explicit and defensible;
-- the team can demonstrate the full workflow step by step.
-
----
-
-## Recommended Demonstration Flow
-
-A strong demo or presentation should show the following:
-
-1. the raw dataset;
-2. one document before and after preprocessing;
-3. tokenization result;
-4. sentiment lexicon logic;
-5. one scored document;
-6. one mapper output;
-7. reducer summary;
-8. final metrics or validation results;
-9. runtime/scalability comparison.
-
----
-
-## Likely Presentation Questions
 
 ### Why did you use a lexicon-based approach instead of machine learning?
 
@@ -843,83 +700,6 @@ These limitations should be acknowledged in the report and oral presentation.
 - support n-gram sentiment handling;
 - compare against machine learning baselines;
 - deploy on Spark or Hadoop.
-
----
-
-## Deliverables Checklist
-
-### Core deliverables
-
-- [ ] raw dataset
-- [ ] preprocessing script
-- [ ] token output
-- [ ] pre-trained sentiment lexicon
-- [ ] scoring script
-- [ ] mapper
-- [ ] reducer
-- [ ] parallel execution script
-- [ ] validation / metrics script
-- [ ] final README
-- [ ] presentation materials
-
-### Recommended output artifacts
-
-- [ ] cleaned dataset
-- [ ] token file
-- [ ] vocabulary file
-- [ ] scored documents
-- [ ] reduced summary
-- [ ] metrics summary
-- [ ] runtime comparison
-
----
-
-## Team Member Contribution Log
-
-### Member 1
-
-- **Name:** `[Full Name]`
-- **Role:** Data Engineer
-- **Tasks completed:**
-  - `[Task 1]`
-  - `[Task 2]`
-  - `[Task 3]`
-
-### Member 2
-
-- **Name:** `[Full Name]`
-- **Role:** Lexicon Specialist
-- **Tasks completed:**
-  - `[Task 1]`
-  - `[Task 2]`
-  - `[Task 3]`
-
-### Member 3
-
-- **Name:** `[Full Name]`
-- **Role:** MapReduce Developer
-- **Tasks completed:**
-  - `[Task 1]`
-  - `[Task 2]`
-  - `[Task 3]`
-
-### Member 4
-
-- **Name:** `[Full Name]`
-- **Role:** Parallelization Engineer
-- **Tasks completed:**
-  - `[Task 1]`
-  - `[Task 2]`
-  - `[Task 3]`
-
-### Member 5
-
-- **Name:** `[Full Name]`
-- **Role:** Validation and Metrics
-- **Tasks completed:**
-  - `[Task 1]`
-  - `[Task 2]`
-  - `[Task 3]`
 
 ---
 
