@@ -80,9 +80,9 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 }
 ```
 
-**Owner:** `[MedvAx](https://github.com/MedvAx)`
+**Owner:** `[BearAx](https://github.com/BearAx)`
 
-**Status:** `[Completed]`
+**Status:** `Completed`
 
 ---
 
