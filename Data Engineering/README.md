@@ -1,5 +1,4 @@
-# Data Engineer — Project 18
-## Distributed Text Mining and Sentiment Analysis
+# Distributed Text Mining and Sentiment Analysis
 
 This stage completes the **Data Engineer** part of the project pipeline:
 
