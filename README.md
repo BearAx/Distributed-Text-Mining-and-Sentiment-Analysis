@@ -80,7 +80,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 }
 ```
 
-**Owner:** `https://github.com/BearAx`
+**Owner:** [BearAx](https://github.com/BearAx)
 
 **Status:** `Completed`
 
