@@ -80,7 +80,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 }
 ```
 
-**Owner:** `[MedvAx]`
+**Owner:** `[MedvAx](https://github.com/MedvAx)`
 
 **Status:** `[Completed]`
 
