@@ -203,7 +203,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 
 **Owner:** [uSs3ewa](https://github.com/uSs3ewa)
 
-**Status:** `[Completed / In Progress / Pending]`
+**Status:** `Completed`
 
 ---
 
@@ -237,7 +237,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 | 1 | Data Engineer | Load, clean, tokenize text | Raw dataset | Cleaned text, tokens | [BearAx](https://github.com/BearAx) | `Done` |
 | 2 | Lexicon Specialist | Score tokens with lexicon | Tokens, lexicon | Score, predicted sentiment | [uSs3ewa](https://github.com/uSs3ewa) | `[Status]` |
 | 3 | MapReduce Developer | Implement mapper and reducer | Scored documents | Aggregated counts | [LeoPython2006](https://github.com/LeoPython2006) | `[Status]` |
-| 4 | Parallelization Engineer | Chunking and parallel execution | Mapper logic | Runtime/scalability results | [Telman3000](https://github.com/Telman3000) | `[Status]` |
+| 4 | Parallelization Engineer | Chunking and parallel execution | Mapper logic | Runtime/scalability results | [Telman3000](https://github.com/Telman3000) | `Done` |
 | 5 | Validation & Metrics | Accuracy and summary statistics | Predictions, labels | Metrics, evaluation report | [Mysteri0K1ng](https://github.com/Mysteri0K1ng) | `[Status]` |
 
 ---
@@ -644,6 +644,24 @@ python scripts/parallel_runner.py
 python scripts/validation_metrics.py
 ```
 
+### Stage 4 — Parallel execution (implemented)
+
+Runs the document-level scoring in parallel, writes chunk-level results, benchmarks runtime
+for different worker counts / chunk sizes, and (optionally) verifies that sequential and
+parallel outputs are consistent.
+
+```bash
+# from repo root
+python scripts/parallel_runner.py --workers 4 --chunk-size 500 --verify
+```
+
+Outputs (saved to `output_data/`):
+
+- `parallel_scored_documents.json`
+- `parallel_sentiment_summary.json`
+- `chunk_level_results.json`
+- `runtime_results.csv`
+
 ---
 
 ### Why did you use a lexicon-based approach instead of machine learning?
@@ -712,7 +730,7 @@ These limitations should be acknowledged in the report and oral presentation.
 | Lexicon scoring | Pre-trained lexicon scoring implemented | `[Status]` |
 | Mapper | Document-level mapper implemented | `[Status]` |
 | Reducer | Aggregation logic implemented | `[Status]` |
-| Parallel execution | Chunk-based parallelism tested | `[Status]` |
+| Parallel execution | Chunk-based parallelism tested | `Done` |
 | Metrics | Accuracy / summary statistics prepared | `[Status]` |
 | Documentation | README and role-specific docs prepared | `Done` |
 
