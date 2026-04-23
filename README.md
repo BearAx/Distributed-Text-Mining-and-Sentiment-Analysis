@@ -131,9 +131,9 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 }
 ```
 
-**Owner:** [uSs3ewa](https://github.com/uSs3ewa)
+**Owner:** [Telman3000](https://github.com/Telman3000)
 
-**Status:** `[Completed / In Progress / Pending]`
+**Status:** `Completed`
 
 ---
 
@@ -201,7 +201,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 - runtime comparison;
 - scalability observations.
 
-**Owner:** [Telman3000](https://github.com/Telman3000)
+**Owner:** [uSs3ewa](https://github.com/uSs3ewa)
 
 **Status:** `[Completed / In Progress / Pending]`
 
