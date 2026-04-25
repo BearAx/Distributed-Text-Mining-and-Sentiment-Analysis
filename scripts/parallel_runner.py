@@ -9,6 +9,7 @@ from pathlib import Path
 from time import perf_counter
 from typing import Dict, Iterable, List, Optional, Tuple
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Allow importing sibling script modules when executed from repo root:
 #   python scripts/parallel_runner.py
@@ -39,7 +40,7 @@ class ChunkResult:
 def chunked(items: List[Dict], chunk_size: int) -> List[List[Dict]]:
     if chunk_size <= 0:
         raise ValueError("chunk_size must be > 0")
-    return [items[i : i + chunk_size] for i in range(0, len(items), chunk_size)]
+    return [items[i: i + chunk_size] for i in range(0, len(items), chunk_size)]
 
 
 def _init_counts() -> SentimentCounts:
@@ -188,20 +189,20 @@ def main() -> None:
     parser.add_argument(
         "--tokens",
         type=Path,
-        default=Path("output_data/tokens.json"),
+        default=BASE_DIR / "output_data" / "tokens.json",
         help="Path to tokenized documents (default: output_data/tokens.json)",
     )
     parser.add_argument(
         "--lexicon",
         type=Path,
-        default=Path("data/sentiment_lexicon.json"),
+        default=BASE_DIR / "data" / "sentiment_lexicon.json",
         help="Path to sentiment lexicon JSON (default: data/sentiment_lexicon.json)",
     )
     parser.add_argument(
         "--outdir",
         type=Path,
-        default=Path("output_data"),
-        help="Output directory (default: output_data)",
+        default=BASE_DIR / "output_parallel",
+        help="Output directory (default: output_parallel)",
     )
     parser.add_argument(
         "--workers",
@@ -254,12 +255,14 @@ def main() -> None:
         chunk_size=args.chunk_size,
     )
     speedup = seq_time / par_time if par_time > 0 else math.inf
-    print(f"Parallel time (workers={args.workers}, chunk_size={args.chunk_size}): {par_time:.4f}s")
+    print(
+        f"Parallel time (workers={args.workers}, chunk_size={args.chunk_size}): {par_time:.4f}s")
     print(f"Speedup vs sequential: {speedup:.2f}x")
 
     if args.verify:
         if _records_signature(seq_records) != _records_signature(par_records):
-            raise SystemExit("Verification failed: sequential and parallel outputs differ.")
+            raise SystemExit(
+                "Verification failed: sequential and parallel outputs differ.")
         print("Verification OK: sequential and parallel outputs match.")
 
     # Save outputs for the chosen configuration
@@ -284,13 +287,16 @@ def main() -> None:
         json.dump(chunk_level, f, ensure_ascii=False, indent=2)
 
     # Benchmark sweep
-    sweep_workers = [int(x.strip()) for x in args.sweep_workers.split(",") if x.strip()]
-    sweep_chunk_sizes = [int(x.strip()) for x in args.sweep_chunk_sizes.split(",") if x.strip()]
+    sweep_workers = [int(x.strip())
+                     for x in args.sweep_workers.split(",") if x.strip()]
+    sweep_chunk_sizes = [int(x.strip())
+                         for x in args.sweep_chunk_sizes.split(",") if x.strip()]
 
     bench_rows = []
     for w in sweep_workers:
         for cs in sweep_chunk_sizes:
-            _, _, t, _ = run_parallel(token_records, lexicon, workers=w, chunk_size=cs)
+            _, _, t, _ = run_parallel(
+                token_records, lexicon, workers=w, chunk_size=cs)
             bench_rows.append(
                 {
                     "workers": w,
@@ -301,13 +307,14 @@ def main() -> None:
 
     bench_path = args.outdir / "runtime_results.csv"
     with open(bench_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=["workers", "chunk_size", "parallel_time_sec"])
+        writer = csv.DictWriter(
+            f, fieldnames=["workers", "chunk_size", "parallel_time_sec"])
         writer.writeheader()
         writer.writerows(bench_rows)
 
-    print(f"Saved outputs to {args.outdir}/ (parallel_scored_documents.json, summaries, runtime_results.csv)")
+    print(
+        f"Saved outputs to {args.outdir}/ (parallel_scored_documents.json, summaries, runtime_results.csv)")
 
 
 if __name__ == "__main__":
     main()
-

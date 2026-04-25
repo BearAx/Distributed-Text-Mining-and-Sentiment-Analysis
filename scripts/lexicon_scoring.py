@@ -1,11 +1,13 @@
-import json
 from pathlib import Path
+import json
 from typing import Dict, List, Tuple
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Paths for lexicon-scoring stage inputs and outputs.
-TOKENS_FILE = Path("output_data/tokens.json")
-LEXICON_FILE = Path("data/sentiment_lexicon.json")
-OUTPUT_DIR = Path("output_data")
+TOKENS_FILE = BASE_DIR / "output_data" / "tokens.json"
+LEXICON_FILE = BASE_DIR / "data" / "sentiment_lexicon.json"
+OUTPUT_DIR = BASE_DIR / "output_lexicon"
 
 SCORED_OUTPUT_FILE = OUTPUT_DIR / "scored_documents.json"
 SUMMARY_OUTPUT_FILE = OUTPUT_DIR / "sentiment_summary.json"

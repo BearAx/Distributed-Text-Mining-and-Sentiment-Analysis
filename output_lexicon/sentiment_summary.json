@@ -1,0 +1,9 @@
+{
+  "documents_count": 4838,
+  "lexicon_terms": 78,
+  "positive_documents": 952,
+  "negative_documents": 272,
+  "neutral_documents": 3614,
+  "evaluated_documents": 4838,
+  "accuracy": 0.6807
+}

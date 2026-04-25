@@ -1,0 +1,13 @@
+{
+  "documents_count": 4838,
+  "positive_documents": 952,
+  "negative_documents": 272,
+  "neutral_documents": 3614,
+  "evaluated_documents": 4838,
+  "accuracy": 0.6807,
+  "workers": 8,
+  "chunk_size": 500,
+  "sequential_time_sec": 0.018188,
+  "parallel_time_sec": 0.18488,
+  "speedup": 0.0984
+}

@@ -4,16 +4,17 @@ import string
 import json
 from collections import Counter
 from pathlib import Path
+from typing import Union
 
 # =========================
 # CONFIG
 # =========================
-INPUT_FILE = "all-data.csv"      # замени на свой файл
-# например "text" / "Sentence" / "review"; если None, скрипт попробует найти сам
+BASE_DIR = Path(__file__).resolve().parent.parent
+INPUT_FILE = BASE_DIR / "data" / "all-data.csv"
+OUTPUT_DIR = BASE_DIR / "output_data"
+
 TEXT_COLUMN = "text"
-# например "label" / "sentiment"; можно оставить None
 LABEL_COLUMN = "label"
-OUTPUT_DIR = "output_data"
 
 # Возможные названия текстовых колонок
 POSSIBLE_TEXT_COLUMNS = [
@@ -26,7 +27,7 @@ POSSIBLE_TEXT_COLUMNS = [
 # =========================
 
 
-def load_dataset(file_path: str) -> pd.DataFrame:
+def load_dataset(file_path: Union[str, Path]) -> pd.DataFrame:
     path = Path(file_path)
 
     if not path.exists():
@@ -213,7 +214,7 @@ def main():
 
     # Сохраняем summary.json
     summary = {
-        "input_file": INPUT_FILE,
+        "input_file": str(INPUT_FILE),
         "text_column": text_col,
         "documents_count": int(len(df)),
         "total_tokens": int(total_tokens),

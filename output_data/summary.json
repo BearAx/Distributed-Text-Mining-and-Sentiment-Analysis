@@ -1,9 +1,9 @@
 {
-  "input_file": "all-data.csv",
+  "input_file": "C:\\Python\\DNP_Project\\Distributed-Text-Mining-and-Sentiment-Analysis\\data\\all-data.csv",
   "text_column": "text",
   "documents_count": 4838,
   "total_tokens": 103049,
-  "unique_tokens": 10111,
+  "unique_tokens": 10103,
   "avg_tokens_per_document": 21.3,
   "top_20_words": [
     [

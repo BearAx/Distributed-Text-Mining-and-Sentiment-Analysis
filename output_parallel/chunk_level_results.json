@@ -1,0 +1,72 @@
+[
+  {
+    "chunk_id": 0,
+    "documents": 500,
+    "positive": 302,
+    "negative": 0,
+    "neutral": 198
+  },
+  {
+    "chunk_id": 1,
+    "documents": 500,
+    "positive": 172,
+    "negative": 33,
+    "neutral": 295
+  },
+  {
+    "chunk_id": 2,
+    "documents": 500,
+    "positive": 58,
+    "negative": 3,
+    "neutral": 439
+  },
+  {
+    "chunk_id": 3,
+    "documents": 500,
+    "positive": 99,
+    "negative": 10,
+    "neutral": 391
+  },
+  {
+    "chunk_id": 4,
+    "documents": 500,
+    "positive": 93,
+    "negative": 15,
+    "neutral": 392
+  },
+  {
+    "chunk_id": 5,
+    "documents": 500,
+    "positive": 21,
+    "negative": 4,
+    "neutral": 475
+  },
+  {
+    "chunk_id": 6,
+    "documents": 500,
+    "positive": 28,
+    "negative": 4,
+    "neutral": 468
+  },
+  {
+    "chunk_id": 7,
+    "documents": 500,
+    "positive": 45,
+    "negative": 16,
+    "neutral": 439
+  },
+  {
+    "chunk_id": 8,
+    "documents": 500,
+    "positive": 64,
+    "negative": 95,
+    "neutral": 341
+  },
+  {
+    "chunk_id": 9,
+    "documents": 338,
+    "positive": 70,
+    "negative": 92,
+    "neutral": 176
+  }
+]
