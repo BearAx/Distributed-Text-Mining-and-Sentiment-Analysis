@@ -321,33 +321,6 @@ The preprocessing stage intentionally stays aligned with the assignment:
 - punctuation removal;
 - tokenization.
 
-## Evaluation Schema Alignment
-
-### Functionality (30%)
-The implementation satisfies functionality because it:
-- loads a real dataset;
-- preprocesses text correctly;
-- classifies sentiment with a pre-trained lexicon;
-- outputs one label per document;
-- aggregates results;
-- benchmarks parallel execution;
-- computes validation metrics.
-
-### Design and Documentation (50%)
-The project includes:
-- modular scripts for each stage;
-- separate output folders per stage;
-- clear handoff between teammates;
-- documented architecture and pipeline logic;
-- concrete result summaries.
-
-### Oral Presentation (20%)
-The project is presentation-ready because:
-- each stage has a clear owner;
-- each stage has visible outputs;
-- the pipeline is easy to explain end-to-end;
-- the design choices are transparent.
-
 ## Strengths
 
 - clear modular architecture;
