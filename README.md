@@ -177,7 +177,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 
 **Owner:** [LeoPython2006](https://github.com/LeoPython2006)
 
-**Status:** `[Completed / In Progress / Pending]`
+**Status:** `Completed`
 
 ---
 
@@ -226,7 +226,7 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 
 **Owner:** [Mysteri0K1ng](https://github.com/Mysteri0K1ng)
 
-**Status:** `[Completed / In Progress / Pending]`
+**Status:** `Completed`
 
 ---
 
