@@ -2,9 +2,10 @@ import json
 from pathlib import Path
 from typing import List, Dict, Tuple
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 # Re‑use the existing lexicon and token loading utilities
-TOKENS_FILE = Path('output_data/tokens.json')
-LEXICON_FILE = Path('data/sentiment_lexicon.json')
+TOKENS_FILE = BASE_DIR / "output_data" / "tokens.json"
+LEXICON_FILE = BASE_DIR / "data" / "sentiment_lexicon.json"
 
 
 def load_tokens(tokens_path: Path) -> List[Dict]:
