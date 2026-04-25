@@ -235,10 +235,10 @@ Data → Preprocessing → Lexicon Scoring → Mapper → Parallel Execution →
 | Stage | Role | Main Work | Main Inputs | Main Outputs | Owner | Status |
 |------|------|-----------|-------------|--------------|-------|--------|
 | 1 | Data Engineer | Load, clean, tokenize text | Raw dataset | Cleaned text, tokens | [BearAx](https://github.com/BearAx) | `Done` |
-| 2 | Lexicon Specialist | Score tokens with lexicon | Tokens, lexicon | Score, predicted sentiment | [uSs3ewa](https://github.com/uSs3ewa) | `[Status]` |
-| 3 | MapReduce Developer | Implement mapper and reducer | Scored documents | Aggregated counts | [LeoPython2006](https://github.com/LeoPython2006) | `[Status]` |
+| 2 | Lexicon Specialist | Score tokens with lexicon | Tokens, lexicon | Score, predicted sentiment | [uSs3ewa](https://github.com/uSs3ewa) | `Done` |
+| 3 | MapReduce Developer | Implement mapper and reducer | Scored documents | Aggregated counts | [LeoPython2006](https://github.com/LeoPython2006) | `Done` |
 | 4 | Parallelization Engineer | Chunking and parallel execution | Mapper logic | Runtime/scalability results | [Telman3000](https://github.com/Telman3000) | `Done` |
-| 5 | Validation & Metrics | Accuracy and summary statistics | Predictions, labels | Metrics, evaluation report | [Mysteri0K1ng](https://github.com/Mysteri0K1ng) | `[Status]` |
+| 5 | Validation & Metrics | Accuracy and summary statistics | Predictions, labels | Metrics, evaluation report | [Mysteri0K1ng](https://github.com/Mysteri0K1ng) | `Done` |
 
 ---
 
@@ -726,10 +726,10 @@ These limitations should be acknowledged in the report and oral presentation.
 | Component | Description | Status |
 |----------|-------------|--------|
 | Dataset loading | Raw dataset is available and readable | `Done` |
-| Preprocessing | Lowercase + punctuation removal + tokenization | `[Status]` |
-| Lexicon scoring | Pre-trained lexicon scoring implemented | `[Status]` |
-| Mapper | Document-level mapper implemented | `[Status]` |
-| Reducer | Aggregation logic implemented | `[Status]` |
+| Preprocessing | Lowercase + punctuation removal + tokenization | `Done` |
+| Lexicon scoring | Pre-trained lexicon scoring implemented | `Done` |
+| Mapper | Document-level mapper implemented | `Done` |
+| Reducer | Aggregation logic implemented | `Done` |
 | Parallel execution | Chunk-based parallelism tested | `Done` |
 | Metrics | Accuracy / summary statistics prepared | `[Status]` |
 | Documentation | README and role-specific docs prepared | `Done` |
