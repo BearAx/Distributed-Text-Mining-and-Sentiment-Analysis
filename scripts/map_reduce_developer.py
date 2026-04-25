@@ -7,6 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TOKENS_FILE = BASE_DIR / "output_data" / "tokens.json"
 LEXICON_FILE = BASE_DIR / "data" / "sentiment_lexicon.json"
 
+OUTPUT_DIR = BASE_DIR / "output_mapreduce"
+MAPPER_OUTPUT_FILE = OUTPUT_DIR / "mapper_results.json"
+REDUCER_OUTPUT_FILE = OUTPUT_DIR / "reducer_summary.json"
+
 
 def load_tokens(tokens_path: Path) -> List[Dict]:
     """Load tokenized documents produced by ``data_preprocessing.py``.
@@ -89,7 +93,8 @@ class MapReduceDeveloper:
         predicted = self._score_to_label(score)
         result = {
             "doc_id": doc_id,
-            "predicted": predicted,
+            "tokens": tokens,
+            "predicted_sentiment": predicted,
             "score": score,
         }
         if "label" in document:
@@ -106,7 +111,7 @@ class MapReduceDeveloper:
         evaluated = 0
         correct = 0
         for r in mapped_results:
-            pred = r.get("predicted")
+            pred = r.get("predicted_sentiment")
             if pred in counts:
                 counts[pred] += 1
             true = r.get("true_label")
@@ -115,11 +120,45 @@ class MapReduceDeveloper:
                 if true == pred:
                     correct += 1
         summary: Dict = {
-            "documents": len(mapped_results),
-            "positive": counts["positive"],
-            "negative": counts["negative"],
-            "neutral": counts["neutral"],
+            "documents_count": len(mapped_results),
+            "positive_documents": counts["positive"],
+            "negative_documents": counts["negative"],
+            "neutral_documents": counts["neutral"],
         }
         if evaluated:
             summary["accuracy"] = round(correct / evaluated, 4)
         return summary
+
+
+def main() -> None:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    print(f"Loading tokenized documents from {TOKENS_FILE}")
+    token_records = load_tokens(TOKENS_FILE)
+    print(f"Loaded {len(token_records)} documents")
+
+    developer = MapReduceDeveloper()
+
+    print("Running mapper")
+    mapper_results = [developer.map(doc) for doc in token_records]
+
+    print("Running reducer")
+    reducer_summary = developer.reduce(mapper_results)
+
+    with open(MAPPER_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(mapper_results, f, ensure_ascii=False, indent=2)
+    print(f"Saved mapper results to {MAPPER_OUTPUT_FILE}")
+
+    with open(REDUCER_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(reducer_summary, f, ensure_ascii=False, indent=2)
+    print(f"Saved reducer summary to {REDUCER_OUTPUT_FILE}")
+
+    print("\\nReducer summary:")
+    for key, value in reducer_summary.items():
+        print(f"{key}: {value}")
+
+    print("\\nMapReduce stage completed.")
+
+
+if __name__ == "__main__":
+    main()

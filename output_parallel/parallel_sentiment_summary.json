@@ -7,7 +7,7 @@
   "accuracy": 0.6807,
   "workers": 8,
   "chunk_size": 500,
-  "sequential_time_sec": 0.018188,
-  "parallel_time_sec": 0.18488,
-  "speedup": 0.0984
+  "sequential_time_sec": 0.021747,
+  "parallel_time_sec": 0.245139,
+  "speedup": 0.0887
 }
