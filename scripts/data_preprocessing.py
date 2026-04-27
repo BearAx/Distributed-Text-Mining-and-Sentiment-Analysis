@@ -6,9 +6,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Union
 
-# =========================
+
 # CONFIG
-# =========================
 BASE_DIR = Path(__file__).resolve().parent.parent
 INPUT_FILE = BASE_DIR / "data" / "all-data.csv"
 OUTPUT_DIR = BASE_DIR / "output_data"
@@ -16,22 +15,19 @@ OUTPUT_DIR = BASE_DIR / "output_data"
 TEXT_COLUMN = "text"
 LABEL_COLUMN = "label"
 
-# Возможные названия текстовых колонок
+# Possible names of text columns
 POSSIBLE_TEXT_COLUMNS = [
     "text", "review", "sentence", "headline", "tweet",
     "content", "body", "message", "document", "news"
 ]
 
-# =========================
+
 # LOAD DATA
-# =========================
-
-
 def load_dataset(file_path: Union[str, Path]) -> pd.DataFrame:
     path = Path(file_path)
 
     if not path.exists():
-        raise FileNotFoundError(f"Файл не найден: {file_path}")
+        raise FileNotFoundError(f"File not found: {file_path}")
 
     suffix = path.suffix.lower()
 
@@ -66,13 +62,10 @@ def load_dataset(file_path: Union[str, Path]) -> pd.DataFrame:
         return pd.DataFrame({"text": lines})
 
     else:
-        raise ValueError(f"Неподдерживаемый формат файла: {suffix}")
+        raise ValueError(f"Unsupported file format: {suffix}")
 
-# =========================
+
 # DETECT TEXT COLUMN
-# =========================
-
-
 def detect_text_column(df: pd.DataFrame) -> str:
     lower_map = {col.lower(): col for col in df.columns}
 
@@ -80,23 +73,20 @@ def detect_text_column(df: pd.DataFrame) -> str:
         if candidate.lower() in lower_map:
             return lower_map[candidate.lower()]
 
-    # Если явного имени нет, попробуем найти первую object/string колонку
+    # If there is no explicit name, let's try to find the first object/string column.
     for col in df.columns:
         if df[col].dtype == "object":
             return col
 
-    raise ValueError("Не удалось определить текстовую колонку автоматически.")
+    raise ValueError("The text column could not be detected automatically.")
 
-# =========================
+
 # TEXT CLEANING
-# =========================
-
-
 def clean_text(text: str) -> str:
     text = str(text).lower()
     text = re.sub(f"[{re.escape(string.punctuation)}]",
-                  " ", text)  # убираем punctuation
-    # нормализуем пробелы
+                  " ", text)  # delete punctuation
+    # normalize the spaces
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
@@ -106,60 +96,57 @@ def tokenize(text: str) -> list:
         return []
     return text.split()
 
-# =========================
+
 # MAIN PIPELINE
-# =========================
-
-
 def main():
     output_path = Path(OUTPUT_DIR)
     output_path.mkdir(parents=True, exist_ok=True)
 
-    print(f"[1] Загружаю датасет: {INPUT_FILE}")
+    print(f"[1] Uploading a dataset: {INPUT_FILE}")
     df = load_dataset(INPUT_FILE)
-    print(f"    Загружено строк: {len(df)}")
-    print(f"    Колонки: {list(df.columns)}")
+    print(f"    Lines uploaded: {len(df)}")
+    print(f"    Columns: {list(df.columns)}")
 
-    # Определяем текстовую колонку
+    # Defining a text column
     text_col = TEXT_COLUMN if TEXT_COLUMN is not None else detect_text_column(
         df)
-    print(f"[2] Использую текстовую колонку: {text_col}")
+    print(f"[2] Use a text column: {text_col}")
 
     if text_col not in df.columns:
-        raise ValueError(f"Колонка '{text_col}' не найдена в датасете.")
+        raise ValueError(f"Column '{text_col}' not found in dataset.")
 
-    # Создаем doc_id
+    # Create doc_id
     df = df.copy()
     df["doc_id"] = range(1, len(df) + 1)
 
-    # Удаляем записи без текста
+    # Deleting entries without text
     df[text_col] = df[text_col].astype(str)
     df = df[df[text_col].str.strip() != ""].copy()
 
-    # Удаляем дубликаты по тексту
+    # Removing duplicates in the text
     before_dedup = len(df)
     df = df.drop_duplicates(subset=[text_col]).copy()
     after_dedup = len(df)
 
-    print(f"[3] После удаления пустых строк: {len(df)}")
-    print(f"[4] Удалено дубликатов: {before_dedup - after_dedup}")
+    print(f"[3] After deleting the empty lines: {len(df)}")
+    print(f"[4] Duplicates removed: {before_dedup - after_dedup}")
 
-    # Очистка и токенизация
-    print("[5] Очищаю тексты и токенизирую")
+    # Purification and tokenization
+    print("[5] I clean up texts and tokenize them")
     df["cleaned_text"] = df[text_col].apply(clean_text)
     df["tokens"] = df["cleaned_text"].apply(tokenize)
     df["token_count"] = df["tokens"].apply(len)
 
-    # Удаляем записи без токенов
+    # Deleting entries without tokens
     before_empty_tokens = len(df)
     df = df[df["token_count"] > 0].copy()
     removed_empty_tokens = before_empty_tokens - len(df)
 
-    print(f"[6] Удалено записей без токенов: {removed_empty_tokens}")
-    print(f"    Финальное число документов: {len(df)}")
+    print(f"[6] Deleted entries without tokens: {removed_empty_tokens}")
+    print(f"    The final number of documents: {len(df)}")
 
-    # Строим словарь частот
-    print("[7] Формирую словарь корпуса")
+    # Building a dictionary of frequencies
+    print("[7] I'm creating a corpus dictionary")
     vocab_counter = Counter()
     for tokens in df["tokens"]:
         vocab_counter.update(tokens)
@@ -167,10 +154,10 @@ def main():
     unique_tokens = len(vocab_counter)
     total_tokens = sum(vocab_counter.values())
 
-    print(f"    Всего токенов: {total_tokens}")
-    print(f"    Уникальных токенов: {unique_tokens}")
+    print(f"    Total tokens: {total_tokens}")
+    print(f"    Unique tokens: {unique_tokens}")
 
-    # Подготовка token records
+    # Preparing token records
     token_records = []
     for _, row in df.iterrows():
         record = {
@@ -183,7 +170,7 @@ def main():
             record["label"] = row[LABEL_COLUMN]
         token_records.append(record)
 
-    # Сохраняем cleaned dataset
+    # Save cleaned dataset
     cleaned_columns = ["doc_id", text_col,
                        "cleaned_text", "tokens", "token_count"]
     if LABEL_COLUMN and LABEL_COLUMN in df.columns:
@@ -192,27 +179,27 @@ def main():
     cleaned_df = df[cleaned_columns].copy()
     cleaned_df.to_csv(output_path / "cleaned_dataset.csv",
                       index=False, encoding="utf-8")
-    print(f"[8] Сохранен cleaned_dataset.csv")
+    print(f"[8] Saved cleaned_dataset.csv")
 
-    # Сохраняем tokens.json
+    # Save tokens.json
     with open(output_path / "tokens.json", "w", encoding="utf-8") as f:
         json.dump(token_records, f, ensure_ascii=False, indent=2)
-    print(f"[9] Сохранен tokens.json")
+    print(f"[9] Saved tokens.json")
 
-    # Сохраняем vocabulary.json
+    # Save vocabulary.json
     with open(output_path / "vocabulary.json", "w", encoding="utf-8") as f:
         json.dump(dict(vocab_counter.most_common()),
                   f, ensure_ascii=False, indent=2)
-    print(f"[10] Сохранен vocabulary.json")
+    print(f"[10] Saved vocabulary.json")
 
-    # Сохраняем top_words.csv
+    # Save top_words.csv
     vocab_df = pd.DataFrame(vocab_counter.most_common(),
                             columns=["token", "frequency"])
     vocab_df.to_csv(output_path / "top_words.csv",
                     index=False, encoding="utf-8")
-    print(f"[11] Сохранен top_words.csv")
+    print(f"[11] Saved top_words.csv")
 
-    # Сохраняем summary.json
+    # Save summary.json
     summary = {
         "input_file": str(INPUT_FILE),
         "text_column": text_col,
@@ -225,9 +212,9 @@ def main():
 
     with open(output_path / "summary.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
-    print(f"[12] Сохранен summary.json")
+    print(f"[12] Saved summary.json")
 
-    # Показываем превью
+    # Showing the preview
     print("\n===== PREVIEW =====")
     print(df[[text_col, "cleaned_text", "tokens"]].head(
         5).to_string(index=False))
@@ -236,7 +223,7 @@ def main():
     for word, freq in vocab_counter.most_common(20):
         print(f"{word}: {freq}")
 
-    print(f"\nГотово. Результаты лежат в папке: {OUTPUT_DIR}")
+    print(f"\nDone. The results are in the folder: {OUTPUT_DIR}")
 
 
 if __name__ == "__main__":
